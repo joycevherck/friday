@@ -1,0 +1,70 @@
+# Defaults: https://github.com/causes/scss-lint/blob/master/config/default.yml
+exclude:
+  - 'public/assets/src/css/vendor/**'
+
+linters:
+  NestingDepth:
+    enabled: true
+    max_depth: 6
+    #exclude:
+     # - 'assets/scss/file_to_exclude.scss'
+
+  # allow element selectors with attributes
+  QualifyingElement:
+    enabled: true
+    allow_element_with_attribute: true
+
+  # allow about:blank
+  UrlFormat:
+    enabled: false
+
+  # permit full hex codes, don't enforce 3-digit if possible
+  HexFormat:
+    enabled: false
+
+  # default of 3 is too strict. Be pragmatic.
+  SelectorDepth:
+    enabled: true
+    max_depth: 5
+
+  # permit `margin: 0 10px 0 0;` don't enforce shorthand
+  Shorthand:
+    enabled: false
+
+  # permit 0.1 as well as .1
+  LeadingZero:
+    enabled: false
+
+  # permit sorting of properties non-alphabetically
+  PropertySortOrder:
+    enabled: false
+
+  # permit empty rules
+  EmptyRule:
+    enabled: false
+
+  # assume that if we are duplicating properties, we mean it
+  DuplicateProperty:
+    enabled: false
+
+  NameFormat:
+    enabled: true
+    convention: hyphenated_lowercase
+
+  SelectorFormat:
+    enabled: true
+    convention: hyphenated_BEM
+
+  SingleLinePerSelector:
+    enabled: true
+
+  DeclarationOrder:
+    enabled: false
+
+  # The colour variable linter doesn't seem to work very well, disable it!
+  ColorVariable:
+    enabled: false
+
+  # We know important is bad, but sometimes we need to use it
+  ImportantRule:
+    enabled: false
