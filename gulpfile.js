@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    connect = require('gulp-connect'),
     sass = require('gulp-ruby-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     cssnano = require('gulp-cssnano'),
@@ -11,6 +12,10 @@ var gulp = require('gulp'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
     del = require('del');
+
+gulp.task('connect', function() {
+  connect.server();
+});
 
 gulp.task('styles', function() {
   return sass('src/css/application.scss', { style: 'expanded' })
@@ -45,10 +50,6 @@ gulp.task('clean', function() {
   return del(['dist/assets/css', 'dist/assets/js', 'dist/assets/img']);
 });
 
-gulp.task('default', ['clean'], function() {
-  gulp.start('styles', 'scripts', 'images');
-});
-
 gulp.task('watch', function() {
 
   // Watch .scss files
@@ -66,4 +67,14 @@ gulp.task('watch', function() {
   // Watch any files in dist/, reload on change
   gulp.watch(['dist/**']).on('change', livereload.changed);
 
+});
+
+gulp.task('dist', function(cb) {
+  var tasks = ['clean', ['styles', 'scripts', 'images']];
+  tasks.push(cb);
+  sequence.apply(this, tasks);
+});
+
+gulp.task('default', function() {
+  gulp.start('styles', 'scripts', 'images', 'watch');
 });
